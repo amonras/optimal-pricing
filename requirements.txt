@@ -1,0 +1,12 @@
+pandas
+scikit-learn
+plotly
+matplotlib
+seaborn
+scipy
+numpy
+jupyter
+pyarrow
+openpyxl
+pytest
+tqdm
