@@ -12,18 +12,18 @@ by running `ipython kernel install --user --name=<venv>`
 
 
 ## Exploratory Data Analysis
-The `EDA.ipynb` notebook performs an Exploratory Data Analysis (EDA) on a dataset. It analyzes
+The [`EDA.ipynb`](EDA.ipynb) notebook performs an Exploratory Data Analysis (EDA) on a dataset. It analyzes
 the different variable distributions, their missing values and the correlation between them.
 
-You can view the notebook [here](EDA.ipynb) or by running `make eda`.
+You can open the notebook or by running `make eda`.
 
 ## Model Selection
-The `Model Selection.ipynb` notebook explores different data preprocessing techniques such as different
+The [`Model_Selection.ipynb`](Model_Selection.ipynb) notebook explores different data preprocessing techniques such as different
 imputations methods, encoding, feature engineering and feature selection. It also explores different regression
 models and finds that the best model is a Gradient Boosting Regressor with engineered features.
 
 ## Price Optimization
-The `Optimal Pricing.ipynb` notebook uses a simple Logistic Regression model to estimate the customer demand for
+The [`Optimal_Pricing.ipynb`](Optimal_Pricing.ipynb) notebook uses a simple Logistic Regression model to estimate the customer demand for
 and explore different pricing strategies. The expected revenue and resulting demand from the following strategies 
 are computed.
 
