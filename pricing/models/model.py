@@ -4,6 +4,11 @@ floats = ['distance', 'est_dst_temperature', 'src_dst_gdp', 'bag_total_price', '
 ints = ['children', 'bag_weight', 'nr_of_stopovers', 'passengers']
 bools = ['is_intercontinental', 'within_country', 'us_movement_outside_us']
 
+airlines = [f'airline{i}' for i in range(1, 14)]
+booking_window_group = ['14 - 20 days', '4 - 6 days', '0 - 3 days', '21 - 60 days',
+       '7 - 13 days', '61 - 121 days', '122 - 178 days', '179 - 319 days']
+partner = ['partner1', 'partner2']
+market_group = [f'market{i}' for i in range(1, 19)]
 
 class Model:
     """

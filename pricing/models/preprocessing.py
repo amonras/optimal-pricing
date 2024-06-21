@@ -5,9 +5,9 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures, StandardScaler, FunctionTransformer
 
-from src.models.imputer import LinearRegressionImputer
-from src.models.features import ExtraFeatures, log_cols
-from src.models.model import categorical, floats, ints, bools, airlines, booking_window_group, partner, market_group
+from pricing.models.imputer import LinearRegressionImputer
+from pricing.models.features import ExtraFeatures, log_cols
+from pricing.models.model import categorical, floats, ints, bools, airlines, booking_window_group, partner, market_group
 
 
 def build_model(

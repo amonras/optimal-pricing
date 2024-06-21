@@ -6,12 +6,15 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from sklearn.metrics import roc_auc_score, roc_curve
-from sklearn.model_selection import train_test_split, KFold, StratifiedKFold
+from sklearn.model_selection import StratifiedKFold
 from tqdm.auto import tqdm
 
-from src.models.model import Model
+from pricing.models.model import Model
 
-warnings.filterwarnings('ignore', 'ConvergenceWarning: lbfgs failed to converge (status=1)')
+# Ignore convergence warnings
+from sklearn.exceptions import ConvergenceWarning
+
+warnings.filterwarnings("ignore", message="lbfgs failed to converge", category=ConvergenceWarning)
 
 
 class Benchmark:
@@ -30,16 +33,12 @@ class Benchmark:
 
     def evaluate(self, splits=5):
         """
-        Evaluate all models on the test set. Compute:
-        - ROC-AUC score for each model
-        - Expected revenue for each model
-        - Confidence intervals for expected revenue
+        Evaluate all models on the test set. Compute ROC-AUC score for each model
 
         :return: DataFrame with the evaluation results
         """
         roc_auc = {}
         exp_rev = {}
-        conf_int = {}
 
         # Split the data into training and test sets using 5-fold cross-validation
         skf = StratifiedKFold(n_splits=splits, shuffle=True, random_state=42)

@@ -4,4 +4,4 @@ from _pytest.fixtures import fixture
 
 @fixture
 def data():
-    return pd.read_parquet('test.parquet')
+    return pd.read_parquet('test/test.parquet')

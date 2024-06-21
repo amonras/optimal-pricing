@@ -4,7 +4,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
 
-from src.models.model import Model, categorical, floats, ints, bools
+from pricing.models.model import Model, categorical, floats, ints, bools
 
 
 class LogisticRegressor(Model):

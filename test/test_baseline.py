@@ -1,9 +1,7 @@
-from src.models.baseline import LogisticRegressor
+from pricing.models.baseline import LogisticRegressor
 
 
 def test_model_coefficients(data):
-    from src.models.preprocessing import build_model
-
     X = data.drop(['Bag_Purchased'], axis=1)
     y = data['Bag_Purchased']
 

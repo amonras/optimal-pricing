@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from matplotlib.testing.compare import compare_images
-from src.plots import prob_hist
+from pricing.plots import prob_hist
 
 
 def test_log_odds_hist_with_valid_data():
@@ -25,4 +25,4 @@ def test_log_odds_hist_with_valid_data():
     fig.savefig("test_output.png")
 
     # Compare the output image with a known good image
-    assert compare_images("expected_output.png", "test_output.png", tol=0) is None
+    assert compare_images("test/expected_output.png", "test/test_output.png", tol=0) is None

@@ -1,14 +1,12 @@
-from pathlib import Path
-
 import numpy as np
-import pandas as pd
 import pytest
+
+from pricing.benchmark import Benchmark
+from pricing.models.baseline import LogisticRegressor
+from pricing.models.logistic_regression import LogisticRegressor2
 
 
 def test_evaluate(data):
-    from src.benchmark import Benchmark
-    from src.models.baseline import LogisticRegressor
-    from src.models.logistic_regression import LogisticRegressor2
 
     model1 = LogisticRegressor()
     model2 = LogisticRegressor2(preprocessing__imputer=True)
@@ -31,7 +29,7 @@ bool_vars = [False, True]
     np.array(np.meshgrid(*([bool_vars] * 5))).T.reshape(-1, 5)
 )
 def test_preprocessing(data, imputer, engineered, interactions, svd, scaler):
-    from src.models.preprocessing import build_model
+    from pricing.models.preprocessing import build_model
 
     X = data.drop(['Bag_Purchased'], axis=1)
     y = data['Bag_Purchased']

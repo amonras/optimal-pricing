@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from numpy.testing import assert_array_equal
 
-from src.models.imputer import LinearRegressionImputer
+from pricing.models.imputer import LinearRegressionImputer
 
 
 def test_imputer_with_known_categories():
