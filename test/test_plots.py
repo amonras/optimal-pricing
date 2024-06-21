@@ -22,7 +22,7 @@ def test_log_odds_hist_with_valid_data():
     fig = prob_hist(predictor, target)
 
     # Save the figure to a file
-    fig.savefig("test_output.png")
+    fig.savefig("test/test_output.png")
 
     # Compare the output image with a known good image
     assert compare_images("test/expected_output.png", "test/test_output.png", tol=0) is None
