@@ -22,10 +22,14 @@ The [`Model_Selection.ipynb`](Model_Selection.ipynb) notebook explores different
 imputations methods, encoding, feature engineering and feature selection. It also explores different regression
 models and finds that the best model is a Gradient Boosting Regressor with engineered features.
 
+You can open the notebook or by running `make model-selection`.
+
 ## Price Optimization
 The [`Optimal_Pricing.ipynb`](Optimal_Pricing.ipynb) notebook uses a simple Logistic Regression model to estimate the customer demand for
 and explore different pricing strategies. The expected revenue and resulting demand from the following strategies 
 are computed.
+
+You can open the notebook or by running `make optimization`.
 
 ### Optimal Pricing
 The optimal pricing strategy is obtained by using the standard optimal price equation which relates marginal cost

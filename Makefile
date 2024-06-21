@@ -11,11 +11,11 @@ eda:
 
 model-selection:
 	# open jupyter notebook Model_Selection.ipynb
-	jupyter notebook Model\ Selection.ipynb
+	jupyter notebook Model_Selection.ipynb
 
 optimization:
 	# open jupyter notebook Optimal Pricing.ipynb
-	jupyter notebook Optimal\ Pricing.ipynb
+	jupyter notebook Optimal_Pricing.ipynb
 
 # Run the tests
 test:
