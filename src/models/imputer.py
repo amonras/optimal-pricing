@@ -57,6 +57,9 @@ class LinearRegressionImputer(_BaseImputer):
         self.transform = transform
         return self
 
+    def get_feature_names_out(self, input_features=None):
+        return input_features if input_features is not None else self.get_feature_names_in
+
     def get_params(self, deep=True):
         return {
             'target': self.target,

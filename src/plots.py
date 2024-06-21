@@ -35,7 +35,7 @@ def prob_hist(predictor: pd.Series, target: pd.Series, nbins=20):
 
     ax1.hist(groups, label=target, bins=nbins)
 
-    ax1.set_xlabel('Predictor')
+    ax1.set_xlabel('odds')
     ax1.set_ylabel('Counts')
 
     # Create a secondary axis with the frequency of the target variable
@@ -44,12 +44,13 @@ def prob_hist(predictor: pd.Series, target: pd.Series, nbins=20):
 
     count = grouped.count().unstack()
     freq = count.apply(lambda x: x / x.sum(), axis=1)
+    error = np.sqrt(freq[True] * freq[False] / count.sum(axis=1)).replace({0: np.nan})
 
     # Calculate the mid-point of each interval
     mid_points = [interval.mid for interval in freq.index]
 
     # Use mid_points as x-values in the plot
-    ax2.plot(mid_points, freq[True], color='r', marker='x')
+    ax2.errorbar(mid_points, freq[True], yerr=error, color='r', marker='o', linestyle='none', capsize=5)
 
     # Superimpose the standard logistic function
     x = np.linspace(df['predictor'].min(), df['predictor'].max(), 100)

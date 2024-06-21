@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 import warnings
 
 import numpy as np
@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore', 'ConvergenceWarning: lbfgs failed to converge 
 
 
 class Benchmark:
-    def __init__(self, models: List[Model] = None, data=None):
+    def __init__(self, models: Dict[str, Model] = None, data=None):
         if data is None:
             file_path = Path(__file__).parent.parent / 'data/export.parquet'
             self.df = pd.read_parquet(file_path)
@@ -28,7 +28,7 @@ class Benchmark:
 
         self.models = models
 
-    def evaluate(self, splits = 5):
+    def evaluate(self, splits=5):
         """
         Evaluate all models on the test set. Compute:
         - ROC-AUC score for each model
@@ -45,41 +45,44 @@ class Benchmark:
         skf = StratifiedKFold(n_splits=splits, shuffle=True, random_state=42)
 
         self.y_pred_prob = pd.DataFrame()
-        for model in (pbar := tqdm(self.models)):
-            pbar.set_description(f'Training model {model.name}')
+        for name, model in (pbar := tqdm(self.models.items())):
+            pbar.set_description(f'Training model {name}')
             # Store the predicted probabilities for each model
 
             # Initialize the columns for the model
-            self.y_pred_prob[model.name] = pd.Series(index=self.y.index)
-            for train_index, test_index in tqdm(skf.split(self.X, self.y), 'Cross-validation', leave=False, total=splits):
+            self.y_pred_prob[name] = pd.Series(index=self.y.index)
+            for train_index, test_index in tqdm(skf.split(self.X, self.y), 'Cross-validation', leave=False,
+                                                total=splits):
                 X_train, X_test = self.X.iloc[train_index], self.X.iloc[test_index]
                 y_train, y_test = self.y.iloc[train_index], self.y.iloc[test_index]
 
                 model.fit(X_train, y_train)
-                self.y_pred_prob.loc[y_test.index, model.name] = pd.Series(model.predict_proba(X_test)[:, 1],
-                                                                           index=y_test.index)
+                self.y_pred_prob.loc[y_test.index, name] = pd.Series(model.predict_proba(X_test)[:, 1],
+                                                                     index=y_test.index)
 
-            roc_auc[model.name] = roc_auc_score(self.y, self.y_pred_prob[model.name])
+            roc_auc[name] = roc_auc_score(self.y, self.y_pred_prob[name])
 
             # Calculate expected revenue
             df_test = self.X.copy()
             df_test['Bag_Purchased'] = self.y
-            df_test['Pred_Prob'] = self.y_pred_prob[model.name]
+            df_test['Pred_Prob'] = self.y_pred_prob[name]
             df_test['Expected_Revenue'] = df_test['Pred_Prob'] * df_test['bag_total_price']
-            exp_rev[model.name] = df_test['Expected_Revenue'].sum()
+            exp_rev[name] = df_test['Expected_Revenue'].sum()
 
-        return pd.DataFrame({"ROC-AUC Score": roc_auc})
+        return pd.DataFrame({"ROC-AUC Score": roc_auc}).sort_values(by="ROC-AUC Score", ascending=False)
 
-    def roc_auc_plot(self, y_pred_prob: pd.DataFrame = None):
+    def roc_auc_plot(self, models=None):
         """
         Plot the ROC curve for each model.
 
         :param y_pred_prob: DataFrame with predicted probabilities for each model
         """
-        y_pred_prob = y_pred_prob or self.y_pred_prob
+        models = models if models is not None else self.models.keys()
+
+        y_pred_prob = self.y_pred_prob
 
         plt.figure(figsize=(10, 6))
-        for model in y_pred_prob.columns:
+        for model in y_pred_prob[models].columns:
             fpr, tpr, _ = roc_curve(self.y, y_pred_prob[model])
             roc_auc = roc_auc_score(self.y, y_pred_prob[model])
             plt.plot(fpr, tpr, label=f'{model} (AUC = {roc_auc:.2f})')
