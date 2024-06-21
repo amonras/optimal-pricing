@@ -1,2 +1,14 @@
 test/test_output.png
 .python-version
+pricing.egg-info
+pricing/__pycache__/*
+pricing/.ipynb_checkpoints/*
+pricing/pricing.egg-info/*
+pricing/models/__pycache__/*
+pricing/models/.ipynb_checkpoints/*
+
+test/__pycache__/*
+
+.idea
+.ipynb_checkpoints
+data/
