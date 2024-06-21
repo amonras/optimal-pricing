@@ -10,3 +10,4 @@ pyarrow
 openpyxl
 pytest
 tqdm
+python-pptx
