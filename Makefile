@@ -1,9 +1,8 @@
-.PHONY: setup run test
+.PHONY: setup eda model-selection optimization test
 
 # Setup the Python environment
 setup:
 	pip install -e .
-
 
 # Run the main script
 eda:
@@ -19,5 +18,5 @@ optimization:
 	jupyter notebook Optimal\ Pricing.ipynb
 
 # Run the tests
-test: setup
+test:
 	pytest test/
