@@ -44,7 +44,7 @@ class Benchmark:
         skf = StratifiedKFold(n_splits=splits, shuffle=True, random_state=42)
 
         self.y_pred_prob = pd.DataFrame()
-        for name, model in (pbar := tqdm(self.models.items())):
+        for name, model in (pbar := tqdm(self.models.items(), leave=False)):
             pbar.set_description(f'Training model {name}')
             # Store the predicted probabilities for each model
 
