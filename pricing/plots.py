@@ -58,3 +58,4 @@ def prob_hist(predictor: pd.Series, target: pd.Series, nbins=20):
     ax2.plot(x, y, color='g', linestyle='--')
 
     return fig
+
