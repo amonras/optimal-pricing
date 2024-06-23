@@ -31,7 +31,7 @@ customer demand and its response to price changes. The notebook uses this model 
 and explore different pricing strategies. For two different strategies, the expected revenue and demand, 
 and their volatilities are computed.
 
-<img src="images/Summary_of_results.png" alt="Summary of results" width="300"/>
+<img src="images/results_constrained.png" alt="Summary of results" width="300"/>
 
 You can open the notebook by running `make optimization`.
 
