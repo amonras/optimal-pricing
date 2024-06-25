@@ -22,6 +22,6 @@ setup(
         'openpyxl',
         'pytest',
         'tqdm',
-        'python-pptx'
+        'dataframe_image'
     ],
 )

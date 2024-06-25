@@ -8,28 +8,32 @@
 To make sure that everything is working correctly, you can run the tests by running `make test`.
 
 If you want to run the code in the jupyter notebooks, make sure to install your virtual environment as a kernel
-by running `ipython kernel install --user --name=<venv>`
+by running `ipython kernel install --user --name=<your-virtual-env>`
 
+This code has been developed and tested with Python 3.12
 
 ## Exploratory Data Analysis
 The [`EDA.ipynb`](EDA.ipynb) notebook performs an Exploratory Data Analysis (EDA) on a dataset. It analyzes
 the different variable distributions, their missing values and the correlation between them.
 
-You can open the notebook or by running `make eda`.
+You can open the notebook by running `make eda`.
 
 ## Model Selection
 The [`Model_Selection.ipynb`](Model_Selection.ipynb) notebook explores different data preprocessing techniques such as different
 imputations methods, encoding, feature engineering and feature selection. It also explores different regression
 models and finds that the best model is a Gradient Boosting Regressor with engineered features.
 
-You can open the notebook or by running `make model-selection`.
+You can open the notebook by running `make model-selection`.
 
 ## Price Optimization
-The [`Optimal_Pricing.ipynb`](Optimal_Pricing.ipynb) notebook uses a simple Logistic Regression model to estimate the customer demand for
-and explore different pricing strategies. The expected revenue and resulting demand from the following strategies 
-are computed.
+The [`Optimal_Pricing.ipynb`](Optimal_Pricing.ipynb) notebook uses a simple Logistic Regression model to estimate the 
+customer demand and its response to price changes. The notebook uses this model to compute the optimal price
+and explore different pricing strategies. For two different strategies, the expected revenue and demand, 
+and their volatilities are computed.
 
-You can open the notebook or by running `make optimization`.
+<img src="images/results_constrained.png" alt="Summary of results" width="300"/>
+
+You can open the notebook by running `make optimization`.
 
 ### Optimal Pricing
 The optimal pricing strategy is obtained by using the standard optimal price equation which relates marginal cost
@@ -41,3 +45,5 @@ resulting demand, which should be no less than a given threshold.
 
 ### Volatility analysis
 The Bootstrap method is used to verify the expected confidence intervals for the revenue and demand estimates.
+
+<img src="images/revenue_histograms.png" alt="Bootstrap" width="300"/>
